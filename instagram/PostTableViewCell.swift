@@ -24,19 +24,20 @@ class PostTableViewCell: UITableViewCell {
     
     
     @IBAction func commentButton(_ sender: Any) {
-    
+        
+        //コメントをデータベースに保存する
         let commentRef = Database.database().reference().child(Const.CommentPath)
         let name = Auth.auth().currentUser?.displayName
         let comment = self.commentTextField.text!
         let commentDic = ["name":name,"comment":comment]
         commentRef.childByAutoId().setValue(commentDic)
         
+        //コメントを表示する
         func setComment(_ commentData: CommentData) {
-            
             self.commentLabel.text="\(commentData.name!):\(commentData.comment!)"
-            self.commentTextField.text=""
         }
-        
+        //コメント欄を空欄にする
+        self.commentTextField.text=""
     }
     
     override func awakeFromNib() {

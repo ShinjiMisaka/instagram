@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class PostTableViewCell: UITableViewCell {
     
@@ -15,6 +16,28 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var likeLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var captionLabel: UILabel!
+    @IBOutlet weak var commentTextField: UITextField!
+    @IBOutlet weak var commentLabel: UILabel!
+    
+    
+    
+    
+    
+    @IBAction func commentButton(_ sender: Any) {
+    
+        let commentRef = Database.database().reference().child(Const.CommentPath)
+        let name = Auth.auth().currentUser?.displayName
+        let comment = self.commentTextField.text!
+        let commentDic = ["name":name,"comment":comment]
+        commentRef.childByAutoId().setValue(commentDic)
+        
+        func setComment(_ commentData: CommentData) {
+            
+            self.commentLabel.text="\(commentData.name!):\(commentData.comment!)"
+            self.commentTextField.text=""
+        }
+        
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

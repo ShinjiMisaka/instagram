@@ -14,6 +14,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var tableView: UITableView!
     
     var postArray: [PostData] = []
+    var commentArray:[CommentData]=[]
     
     // DatabaseのobserveEventの登録状態を表す
     var observing = false
@@ -40,6 +41,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("DEBUG_PRINT: viewWillAppear")
+        
         
         if Auth.auth().currentUser != nil {
             if self.observing == false {
@@ -123,6 +125,9 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // セル内のボタンがタップされた時に呼ばれるメソッド
     @objc func handleButton(_ sender: UIButton, forEvent event: UIEvent) {
+        
+        self.tableView.reloadData()
+        
         print("DEBUG_PRINT: likeボタンがタップされました。")
         
         // タップされたセルのインデックスを求める
@@ -154,6 +159,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             let postRef = Database.database().reference().child(Const.PostPath).child(postData.id!)
             let likes = ["likes": postData.likes]
             postRef.updateChildValues(likes)
+            
             
         }
     }

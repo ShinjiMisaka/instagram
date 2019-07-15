@@ -107,6 +107,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="captionLabel" destination="UcI-va-TE4" id="R2p-GR-rDy"/>
+                <outlet property="commentButton" destination="cqt-yU-VzN" id="nrA-0s-pV9"/>
                 <outlet property="commentLabel" destination="U1S-iV-4pu" id="BjJ-QK-mrz"/>
                 <outlet property="commentTextField" destination="Hh4-6B-iqp" id="kyb-rZ-2WK"/>
                 <outlet property="dateLabel" destination="FDo-ES-1tf" id="fB3-OQ-tcV"/>

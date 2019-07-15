@@ -18,6 +18,7 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var captionLabel: UILabel!
     @IBOutlet weak var commentTextField: UITextField!
     @IBOutlet weak var commentLabel: UILabel!
+    @IBOutlet weak var commentButton: UIButton!
     
     
     
@@ -31,11 +32,7 @@ class PostTableViewCell: UITableViewCell {
         let comment = self.commentTextField.text!
         let commentDic = ["name":name,"comment":comment]
         commentRef.childByAutoId().setValue(commentDic)
-        
-        //コメントを表示する
-        func setComment(_ commentData: CommentData) {
-            self.commentLabel.text="\(commentData.name!):\(commentData.comment!)"
-        }
+
         //コメント欄を空欄にする
         self.commentTextField.text=""
     }
@@ -49,6 +46,12 @@ class PostTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
+    }
+    
+    func setComment(_ commentData: CommentData) {
+        
+        self.commentLabel.text="\(commentData.name!):\(commentData.comment!)"
+        
     }
     
     func setPostData(_ postData: PostData) {

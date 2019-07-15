@@ -30,6 +30,8 @@ class PostData: NSObject {
         
         self.name = valueDictionary["name"] as? String
         
+        self.comment = valueDictionary["comment"] as? String
+        
         self.caption = valueDictionary["caption"] as? String
         
         let time = valueDictionary["time"] as? String

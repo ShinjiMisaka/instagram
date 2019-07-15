@@ -26,13 +26,8 @@ class PostTableViewCell: UITableViewCell {
     
     @IBAction func commentButton(_ sender: Any) {
         
-        //コメントをデータベースに保存する
-        let commentRef = Database.database().reference().child(Const.CommentPath)
-        let name = Auth.auth().currentUser?.displayName
-        let comment = self.commentTextField.text!
-        let commentDic = ["name":name,"comment":comment]
-        commentRef.childByAutoId().setValue(commentDic)
-
+        
+        
         //コメント欄を空欄にする
         self.commentTextField.text=""
     }
@@ -48,16 +43,11 @@ class PostTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setComment(_ commentData: CommentData) {
-        
-        self.commentLabel.text="\(commentData.name!):\(commentData.comment!)"
-        
-    }
-    
     func setPostData(_ postData: PostData) {
         self.postImageView.image = postData.image
         
         self.captionLabel.text = "\(postData.name!) : \(postData.caption!)"
+        self.commentLabel.text = "\(postData.name!) : \(postData.comment!)"
         let likeNumber = postData.likes.count
         likeLabel.text = "\(likeNumber)"
         

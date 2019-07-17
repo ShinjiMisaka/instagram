@@ -16,6 +16,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     var postArray: [PostData] = []
     
+    
     // DatabaseのobserveEventの登録状態を表す
     var observing = false
     
@@ -141,7 +142,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let postData = postArray[indexPath!.row]
         
         // Firebaseに保存するデータの準備
-        if let comment = commentTextField.text{
+        if   let comment:String = "\(Auth.auth().currentUser?.displayName ?? "nil"):\( commentTextField.text!)"{
             postData.comments.append(comment)
         }
             // 増えたcommentをFirebaseに保存する

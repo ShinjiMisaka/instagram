@@ -42,7 +42,7 @@ class PostTableViewCell: UITableViewCell {
         let dateString = formatter.string(from: postData.date!)
         self.dateLabel.text = dateString
         
-        self.commentLabel.text = "\(postData.name!) : \(postData.comments)"
+        self.commentLabel.text = " \(postData.comments)"
         
         if postData.isLiked {
             let buttonImage = UIImage(named: "like_exist")

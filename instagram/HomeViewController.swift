@@ -12,6 +12,7 @@ import Firebase
 class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var commentTextField: UITextField!
     
     var postArray: [PostData] = []
     
@@ -129,72 +130,30 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // セル内のcommentButtonがタップされた時に呼ばれるメソッド
     @objc func homeCommentButton(_ sender: UIButton, forEvent event: UIEvent) {
         
-        if Auth.auth().currentUser != nil {
-            if self.observing == false {
-                // 要素が追加されたらpostArrayに追加してTableViewを再表示する
-                let postsRef = Database.database().reference().child(Const.PostPath)
-                postsRef.observe(.childAdded, with: { snapshot in
-                    print("DEBUG_PRINT: .childAddedイベントが発生しました。")
-                    
-                    // PostDataクラスを生成して受け取ったデータを設定する
-                    if let uid = Auth.auth().currentUser?.uid {
-                        let postData = PostData(snapshot: snapshot, myId: uid)
-                        self.postArray.insert(postData, at: 0)
-                        
-                        // TableViewを再表示する
-                        self.tableView.reloadData()
-                    }
-                })
-                // 要素が変更されたら該当のデータをpostArrayから一度削除した後に新しいデータを追加してTableViewを再表示する
-                postsRef.observe(.childChanged, with: { snapshot in
-                    print("DEBUG_PRINT: .childChangedイベントが発生しました。")
-                    
-                    if let uid = Auth.auth().currentUser?.uid {
-                        // PostDataクラスを生成して受け取ったデータを設定する
-                        let postData = PostData(snapshot: snapshot, myId: uid)
-                        
-                        // 保持している配列からidが同じものを探す
-                        var index: Int = 0
-                        for post in self.postArray {
-                            if post.id == postData.id {
-                                index = self.postArray.firstIndex(of: post)!
-                                break
-                            }
-                        }
-                        
-                        // 差し替えるため一度削除する
-                        self.postArray.remove(at: index)
-                        
-                        // 削除したところに更新済みのデータを追加する
-                        self.postArray.insert(postData, at: index)
-                        
-                        // TableViewを再表示する
-                        self.tableView.reloadData()
-                    }
-                })
-                
-                // DatabaseのobserveEventが上記コードにより登録されたため
-                // trueとする
-                observing = true
-            }
-        } else {
-            if observing == true {
-                // ログアウトを検出したら、一旦テーブルをクリアしてオブザーバーを削除する。
-                // テーブルをクリアする
-                postArray = []
-                tableView.reloadData()
-                // オブザーバーを削除する
-                let postsRef = Database.database().reference().child(Const.PostPath)
-                postsRef.removeAllObservers()
-                
-                // DatabaseのobserveEventが上記コードにより解除されたため
-                // falseとする
-                observing = false
-            }
-        }
+        print("DEBUG_PRINT: commentボタンがタップされました。")
         
-    }
-    
+        // タップされたセルのインデックスを求める
+        let touch = event.allTouches?.first
+        let point = touch!.location(in: self.tableView)
+        let indexPath = tableView.indexPathForRow(at: point)
+        
+        // 配列からタップされたインデックスのデータを取り出す
+        let postData = postArray[indexPath!.row]
+        
+        // Firebaseに保存するデータの準備
+        if let comment = commentTextField.text{
+            postData.comments.append(comment)
+        }
+            // 増えたcommentをFirebaseに保存する
+            let postRef = Database.database().reference().child(Const.PostPath).child(postData.id!)
+            let comments = ["comments": postData.comments]
+            postRef.updateChildValues(comments)
+        
+        commentTextField.text=""
+            
+            
+        }
+
     
     // セル内のlikeButtonがタップされた時に呼ばれるメソッド
     @objc func handleButton(_ sender: UIButton, forEvent event: UIEvent) {

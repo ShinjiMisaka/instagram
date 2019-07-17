@@ -115,26 +115,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="d2b-Eu-vdD">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="768"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="コメント入力" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Opx-cF-7hW">
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Dj0-rA-bAT"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="d2b-Eu-vdD" firstAttribute="top" secondItem="UGQ-hq-4xk" secondAttribute="top" id="a8b-nR-SE4"/>
-                            <constraint firstItem="UGQ-hq-4xk" firstAttribute="trailing" secondItem="d2b-Eu-vdD" secondAttribute="trailing" id="eAe-pD-b7h"/>
-                            <constraint firstItem="d2b-Eu-vdD" firstAttribute="leading" secondItem="UGQ-hq-4xk" secondAttribute="leading" id="fgJ-8R-Hf0"/>
-                            <constraint firstItem="UGQ-hq-4xk" firstAttribute="bottom" secondItem="d2b-Eu-vdD" secondAttribute="bottom" id="uSp-ZJ-gZd"/>
+                            <constraint firstItem="Opx-cF-7hW" firstAttribute="leading" secondItem="UGQ-hq-4xk" secondAttribute="leading" id="Ary-NE-FoE"/>
+                            <constraint firstItem="d2b-Eu-vdD" firstAttribute="leading" secondItem="UGQ-hq-4xk" secondAttribute="leading" id="BBQ-Cr-2jF"/>
+                            <constraint firstItem="UGQ-hq-4xk" firstAttribute="trailing" secondItem="Opx-cF-7hW" secondAttribute="trailing" id="PEj-CZ-hKn"/>
+                            <constraint firstItem="d2b-Eu-vdD" firstAttribute="trailing" secondItem="UGQ-hq-4xk" secondAttribute="trailing" id="UNq-4z-1a4"/>
+                            <constraint firstItem="d2b-Eu-vdD" firstAttribute="top" secondItem="UGQ-hq-4xk" secondAttribute="top" id="gfl-i5-dds"/>
+                            <constraint firstItem="UGQ-hq-4xk" firstAttribute="bottom" secondItem="Opx-cF-7hW" secondAttribute="bottom" id="kyx-fj-FW8"/>
+                            <constraint firstItem="Opx-cF-7hW" firstAttribute="top" secondItem="d2b-Eu-vdD" secondAttribute="bottom" id="y93-2J-VXv"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UGQ-hq-4xk"/>
                     </view>
                     <connections>
+                        <outlet property="commentTextField" destination="Opx-cF-7hW" id="ruq-EO-Qy0"/>
                         <outlet property="tableView" destination="d2b-Eu-vdD" id="87h-JO-183"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fnq-hH-ijb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="946" y="-621"/>
+            <point key="canvasLocation" x="944.92753623188412" y="-621.42857142857144"/>
         </scene>
         <!--Image Select View Controller-->
         <scene sceneID="Jl9-tT-aZh">

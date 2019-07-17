@@ -16,21 +16,8 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var likeLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var captionLabel: UILabel!
-    @IBOutlet weak var commentTextField: UITextField!
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var commentButton: UIButton!
-    
-    
-    
-    
-    
-    @IBAction func commentButton(_ sender: Any) {
-        
-        
-        
-        //コメント欄を空欄にする
-        self.commentTextField.text=""
-    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -47,7 +34,6 @@ class PostTableViewCell: UITableViewCell {
         self.postImageView.image = postData.image
         
         self.captionLabel.text = "\(postData.name!) : \(postData.caption!)"
-        self.commentLabel.text = "\(postData.name!) : \(postData.comment!)"
         let likeNumber = postData.likes.count
         likeLabel.text = "\(likeNumber)"
         
@@ -55,6 +41,8 @@ class PostTableViewCell: UITableViewCell {
         formatter.dateFormat = "yyyy-MM-dd HH:mm"
         let dateString = formatter.string(from: postData.date!)
         self.dateLabel.text = dateString
+        
+        self.commentLabel.text = "\(postData.name!) : \(postData.comments)"
         
         if postData.isLiked {
             let buttonImage = UIImage(named: "like_exist")

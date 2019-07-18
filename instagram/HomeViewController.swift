@@ -152,7 +152,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         commentTextField.text=""
             
-            
         }
 
     

@@ -43,6 +43,7 @@ class PostTableViewCell: UITableViewCell {
         self.dateLabel.text = dateString
         
         var commentText = ""
+        self.commentLabel.text = ""
         for all in postData.comments {
             commentText += "\(all)\n"
            self.commentLabel.text = "\(commentText)"
